@@ -9,3 +9,4 @@ spec:
    - traefik
    - api
    - default
+   - coredns-extra

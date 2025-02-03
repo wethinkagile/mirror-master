@@ -11,5 +11,4 @@ spec:
         search:
           - noevog.ocp.projects.frequentis.frq
         server:
-          - 172.17.4.200
-          - 8.8.8.8
+          - 172.17.4.101

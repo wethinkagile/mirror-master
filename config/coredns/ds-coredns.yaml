@@ -1,0 +1,122 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: coredns-extra
+  namespace: openshift-dns
+spec:
+  minReadySeconds: 9
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      coredns: extra
+  template:
+    metadata:
+      labels:
+        coredns: extra
+    spec:
+      containers:
+      - args:
+        - -conf
+        - /etc/coredns/Corefile
+        command:
+        - coredns
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:2164d9059b8df17974fbd6513d442adb91987f058d6df2c0025ae160491c986e
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: dns
+        ports:
+        - containerPort: 5353
+          name: dns
+          protocol: UDP
+        - containerPort: 5353
+          name: dns-tcp
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ready
+            port: 8181
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 3
+        resources:
+          requests:
+            cpu: 50m
+            memory: 70Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: FallbackToLogsOnError
+        volumeMounts:
+        - mountPath: /etc/coredns
+          name: dns-extra
+          readOnly: true
+      dnsPolicy: Default
+      nodeSelector:
+        kubernetes.io/os: linux
+      priorityClassName: system-node-critical
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: dns
+      serviceAccountName: dns
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+      volumes:
+      - configMap:
+          defaultMode: 420
+          items:
+          - key: Corefile
+            path: Corefile
+          name: dns-extra
+        name: dns-extra
+      - name: metrics-tls
+        secret:
+          defaultMode: 420
+          secretName: dns-default-metrics-tls
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 10%
+      maxUnavailable: 0
+    type: RollingUpdate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coredns-extra
+  namespace: openshift-dns
+  labels:
+    coredns: extra
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: dns
+    port: 53
+    protocol: UDP
+    targetPort: dns
+  - name: dns-tcp
+    port: 53
+    protocol: TCP
+    targetPort: dns-tcp
+  - name: metrics
+    port: 9154
+    protocol: TCP
+    targetPort: metrics
+  selector:
+    coredns: extra
+  sessionAffinity: None
+  type: LoadBalancer

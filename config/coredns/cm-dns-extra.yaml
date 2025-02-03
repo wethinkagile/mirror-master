@@ -1,0 +1,57 @@
+apiVersion: v1
+data:
+  Corefile: |
+    .:5353 {
+        bufsize 1232
+        errors
+        log . {
+            class error
+        }
+        health {
+            lameduck 20s
+        }
+        ready
+        cache 30
+        reload
+        template IN A noevog.ocp.projects.frequentis.frq {
+            match .*[.]apps.noevog.ocp.projects.frequentis.frq
+            answer "{{ .Name }} 60 in {{ .Type }} 172.17.4.110"
+            fallthrough
+        }
+        template IN AAAA noevog.ocp.projects.frequentis.frq {
+            match .*[.]apps.noevog.ocp.projects.frequentis.frq
+
+            fallthrough
+        }
+        template IN A noevog.ocp.projects.frequentis.frq {
+            match ^api.noevog.ocp.projects.frequentis.frq
+            answer "{{ .Name }} 60 in {{ .Type }} 172.17.4.111"
+            fallthrough
+        }
+        template IN AAAA noevog.ocp.projects.frequentis.frq {
+            match ^api.noevog.ocp.projects.frequentis.frq
+
+            fallthrough
+        }
+        template IN A noevog.ocp.projects.frequentis.frq {
+            match ^api-int.noevog.ocp.projects.frequentis.frq
+            answer "{{ .Name }} 60 in {{ .Type }} 172.17.4.111"
+            fallthrough
+        }
+        template IN AAAA noevog.ocp.projects.frequentis.frq {
+            match ^api-int.noevog.ocp.projects.frequentis.frq
+
+            fallthrough
+        }
+        hosts {
+            172.17.4.121 control-01 control-01.noevog.ocp.projects.frequentis.frq
+            172.17.4.131 worker-01 worker-01.noevog.ocp.projects.frequentis.frq
+            172.17.4.132 worker-02 worker-02.noevog.ocp.projects.frequentis.frq
+            fallthrough
+        }
+        forward . 172.17.4.200 1.1.1.1
+    }
+kind: ConfigMap
+metadata:
+  name: dns-extra
+  namespace: openshift-dns
