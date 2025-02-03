@@ -1,0 +1,31 @@
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+  - name: keycloak 
+    mappingMethod: claim 
+    type: OpenID
+    openID:
+      clientID: kc-sso
+      clientSecret: 
+        name: kc-client-secret
+      claims: 
+        preferredUsername:
+        - preferred_username
+        name:
+        - name
+        email:
+        - email
+        groups:
+        - groups
+      issuer: https://keycloak.apps.noevog.ocp.projects.frequentis.frq/realms/cluster 
+      ca:
+        name: keycloak-ca-configmap
+  - name: local
+    mappingMethod: claim
+    type: HTPasswd
+    htpasswd:
+      fileData:
+        name: htpass-secret

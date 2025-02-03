@@ -1,0 +1,16 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  namespace: metallb-system
+  name: traefik
+spec:
+  addresses:
+  - 172.17.4.112/32
+  autoAssign: true
+  avoidBuggyIPs: false
+  serviceAllocation:
+    namespaces:
+    - traefik-ingress
+    serviceSelectors:
+      - matchLabels:
+          app.kubernetes.io/name: traefik

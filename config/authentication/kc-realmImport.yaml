@@ -1,0 +1,27 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: KeycloakRealmImport
+metadata:
+  name: kc-sso-realm
+  namespace: keycloak
+spec:
+  keycloakCRName: kc-sso
+  placeholders:
+    ENV_SECRET:
+      secret:
+        name: kc-client-secret
+        key: clientSecret
+  realm:
+    id: cluster
+    realm: cluster
+    displayName: cluster
+    enabled: true
+    clients:
+      - clientId: kc-sso
+        name: kc-sso
+        enabled: true
+        publicClient: false
+        protocol: openid-connect
+        clientAuthenticatorType: client-secret
+        secret: ${ENV_SECRET}
+        redirectUris:
+          - '*'

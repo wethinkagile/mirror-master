@@ -1,0 +1,25 @@
+# Copy images    
+
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhorn-system/longhorn-engine:v1.8.0 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/longhorn-engine:v1.8.0
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/longhorn-manager:v1.8.0 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/longhorn-manager:v1.8.0
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/longhorn-ui:v1.8.0 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/longhorn-ui:v1.8.0 
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhorn-instance-manager:v1.8.0 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/longhorn-instance-manager:v1.8.0
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/longhorn-share-manager:v1.8.0 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/longhorn-share-manager:v1.8.0 
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/backing-image-manager:v1.8.0 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/backing-image-manager:v1.8.0 
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/support-bundle-kit:v0.0.49 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/support-bundle-kit:v0.0.49
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/csi-attacher:v4.8.0 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/csi-attacher:v4.8.0 
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/csi-provisioner:v5.1.0-20241220 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/csi-provisioner:v5.1.0-20241220 
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/csi-node-driver-registrar:v2.13.0 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/csi-node-driver-registrar:v2.13.0
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/csi-resizer:v1.13.1 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/csi-resizer:v1.13.1
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/csi-snapshotter:v8.2.0 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/csi-snapshotter:v8.2.0 
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/longhornio/livenessprobe:v2.15.0 docker://registry.apps.noevog.ocp.projects.frequentis.frq/longhorn-system/livenessprobe:v2.15.0 
+
+skopeo copy --dest-tls-verify=false docker://docker.io/traefik:v3.3.2 docker://foif.rel.dkr.frequentis.frq/traefik/traefik:v3.3.2
+skopeo copy --dest-tls-verify=false docker://foif.rel.dkr.frequentis.frq/traefik/traefik:v3.3.2 docker://registry.openshift.local:3000/frqadmin/traefik/traefik:v3.3.2
+skopeo copy --dest-tls-verify=false docker://registry.openshift.local:3000/frqadmin/traefik/traefik:v3.3.2 docker://registry.apps.noevog.ocp.projects.frequentis.frq/traefik-ingress/traefik:v3.3.2
+
+skopeo copy --dest-tls-verify=false docker://docker.io/postgres:16.4 docker://foif.rel.dkr.frequentis.frq/postgres/postgres:16.4
+skopeo copy --dest-tls-verify=false docker://foif.rel.dkr.frequentis.frq/postgres/postgres:16.4 docker://registry.openshift.local:3000/frqadmin/postgres/postgres:16.4
+
+Internal registry usage:
+image-registry.openshift-image-registry.svc:5000/longhorn-system/longhorn-ui:v1.8.0

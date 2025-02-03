@@ -1,0 +1,17 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  namespace: metallb-system
+  name: ingress-default
+spec:
+  addresses:
+  - 172.17.4.110/32
+  autoAssign: true
+  avoidBuggyIPs: false
+  serviceAllocation:
+    namespaces:
+    - openshift-ingress
+    serviceSelectors:
+      - matchLabels:
+          router: router-default
+  

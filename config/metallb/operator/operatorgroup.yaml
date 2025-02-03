@@ -1,0 +1,9 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    olm.providedAPIs: BFDProfile.v1beta1.metallb.io,BGPAdvertisement.v1beta1.metallb.io,BGPPeer.v1beta1.metallb.io,BGPPeer.v1beta2.metallb.io,Community.v1beta1.metallb.io,FRRConfiguration.v1beta1.frrk8s.metallb.io,FRRNodeState.v1beta1.frrk8s.metallb.io,IPAddressPool.v1beta1.metallb.io,L2Advertisement.v1beta1.metallb.io,MetalLB.v1beta1.metallb.io
+  name: metallb-system-operatorgroup
+  namespace: metallb-system
+spec:
+  upgradeStrategy: Default

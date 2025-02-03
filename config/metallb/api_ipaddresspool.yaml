@@ -1,0 +1,16 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  namespace: metallb-system
+  name: api
+spec:
+  addresses:
+  - 172.17.4.111/32
+  autoAssign: true
+  avoidBuggyIPs: false
+  serviceAllocation:
+    namespaces:
+    - openshift-apiserver
+    serviceSelectors:
+      - matchLabels:
+          apiserver: "true"

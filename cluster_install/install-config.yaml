@@ -1,0 +1,56 @@
+apiVersion: v1
+basedomain: projects.frequentis.frq
+metadata:
+  name: noevog.ocp
+networking:
+  clusterNetwork:
+  - cidr: 100.72.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 172.17.4.0/24
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 100.68.0.0/16
+compute:
+- name: worker
+  replicas: 2
+controlPlane:
+  name: master
+  replicas: 1
+platform:
+  none: {}
+pullSecret: <pull-secret>
+sshKey: <ssh-key>
+imageDigestSources:
+- mirrors:
+  - registry.openshift.local:3000/frqadmin/openshift/release
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+- mirrors:
+  - registry.openshift.local:3000/frqadmin/openshift/release-images
+  source: quay.io/openshift-release-dev/ocp-release
+additionalTrustBundle: |
+  -----BEGIN CERTIFICATE-----
+  MIIETDCCArSgAwIBAgIQEQXae+tQnoybvZmuVzfp+TANBgkqhkiG9w0BAQsFADAi
+  MRAwDgYDVQQKEwdBY21lIENvMQ4wDAYDVQQDEwVHaXRlYTAeFw0yNTAxMTcxMjU5
+  NTZaFw0yNjAxMTcxMjU5NTZaMCIxEDAOBgNVBAoTB0FjbWUgQ28xDjAMBgNVBAMT
+  BUdpdGVhMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAzL+U65T7ZEAc
+  YBuDj1dt+mJ/mPyFrNXThbaYLp1KgrgS1/yXqpzjPXH0z4FlUEMqTqntfTDV6deH
+  u5TBH5PqSOE4nCVZYYwvFOK9MjDIMjmH9MW9y84HpCHNpUM6Zptt8HHYzWjEdFek
+  gWcSVF0QqTSU33YtrO5/KEpQ+zpxtwnvfzzVhIpR8Bay2df8dXcoIwdYa0BnOYBp
+  7nhYWFnaBMU2IeTCeOhg4JOvvbVYgbuItvpQDam7RX+KenXOTo5vsJxTFYJyvIfn
+  7Imsli8AMhlD67PF+y0cEvH+RI4NZU/HaegKuK/7RET+qHLX3Em3eaQ8JFq3K8FP
+  bFBIxDFrKCnpqLJnQ9RlUKrdmU60VMppjhzASGqPQ9TIO69WaPmbLXRD0x89LCAl
+  t8kP1osmmzY0QkPFD6BcnUJSPFeOwyEy1NZoYCJenpYC3kut8fq4AaMeiaILn3Uf
+  l5wVdJRtvKO2hnfsBbxkyaoHdGcPUs45oJsVHP1IC6ucaSj/xSMzAgMBAAGjfjB8
+  MA4GA1UdDwEB/wQEAwICpDATBgNVHSUEDDAKBggrBgEFBQcDATAPBgNVHRMBAf8E
+  BTADAQH/MB0GA1UdDgQWBBRZxPSEHN4CHssMJMZKkbl2sqZzCTAlBgNVHREEHjAc
+  ghhyZWdpc3RyeS5vcGVuc2hpZnQubG9jYWyCADANBgkqhkiG9w0BAQsFAAOCAYEA
+  NVThA2BpYt02jGQy9kGjDHX0/MAr3GeCjTqAYl30yaxgBHdHaM6AhNpd8oQnLVuD
+  QJIL5keZ4XcFKCAn/A7FrSlQO12Lmf605+4PGTkx+pE9lIsynqV4/E1Qz42hkNI0
+  xCiyZuy3BizMGw9q6cXapkF+Kej+ffcmi9ut08jRwFjMPECvx4dClWphRXRoRra4
+  bvrZzY84vfGqjfR5nREgNrcRqW+Aphc72t7E84YnCtnDYDkUJTsMSemvoHp6ycOf
+  oZLS2mbfJ9IDF931ogJFNSiNWlojMd8a83x/bpw6LtmrTTsRrmTHqf0jQwiCzbpv
+  H846CTRiOFsB0og9HsxQS1vZ4VsHsYI4ktVwjvDtH3nr0PYgP1XoLvfYiuaRDGma
+  Wq0qIIMquopAon9QVe/8NdMxHvUV4EI1xswWU3ElaySfMnb8bW/vMwYfrR4dzi5R
+  89NC7PlibujnHok3nh02fYNnqvNAujx9435ZOrHtyqQn7tT+xDMzXq3p21uYZuN9
+  -----END CERTIFICATE-----
