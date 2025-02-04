@@ -42,12 +42,12 @@ fi
 
 if [ ! -z "$dest_auth_pwd" ] ; then
   echo -e "Destination Registry Authentication found! \n"
-  echo "$dest_auth_pwd" | docker login -u $dest_auth_user --password-stdin https://$dest_registry 
+  echo "$dest_auth_pwd" | podman login -u $dest_auth_user --password-stdin https://$dest_registry 
 fi 
 
 if [ ! -z "$source_auth_pwd" ] ; then
   echo -e "Source Registry Authentication found! \n"
-  echo "$source_auth_pwd" | docker login -u $source_auth_user --password-stdin https://$source_registry
+  echo "$source_auth_pwd" | podman login -u $source_auth_user --password-stdin https://$source_registry
 fi 
 
 # Displaying Configuration
