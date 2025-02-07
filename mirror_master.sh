@@ -3,7 +3,9 @@
 # Usage
 function usage() {
   echo -e "\nDescription: This script uses skopeo to sync 2 docker registries please be sure to have the following text file in place:"
-  echo -e "\nimage-list.txt\n"
+  echo -e " image-list.txt inlcuding project path and image tags\n"
+  echo -e "SOURCE_REGISTRY\n"
+  echo -e "DEST_REGISTRY\n"
   exit 1
 }
 
@@ -33,5 +35,5 @@ done < images-list.txt
 
 # Function
 function copy_image($image) {
-    # skopeo copy docker://$source_registry/$image docker://$dest_registry/$image
+    skopeo copy docker://$source_registry/$image docker://$dest_registry/$image --dest-tls-verify=false
 }
