@@ -1,39 +1,35 @@
 #!/bin/bash
 
-# Usage
-function usage() {
-  echo -e "\nDescription: This script uses skopeo to sync 2 docker registries please be sure to have the following text file in place:"
-  echo -e " image-list.txt inlcuding project path and image tags\n"
-  echo -e "SOURCE_REGISTRY\n"
-  echo -e "DEST_REGISTRY\n"
-  exit 1
-}
-
+if [ -e "images-list.txt" ]; then
+    echo -e "\n # Found images-list.txt"
+else
+   echo -e "\n # Please be sure to have the following text file in\
+ place: images-list.txt\n"
+   exit 1
+fi
 
 # Checking Variables
-if [ -z "$dest_registry" ] ; then
-  echo -e "DEST_REGISTRY variable empty or missing"
-  usage;
+if [ -z "$DEST_REGISTRY" ] ; then
+  echo -e "\n# DEST_REGISTRY variable empty or missing\n"
+  exit 1
 fi
 
-if [ -z "$source_registry" ] ; then
-  echo -e "SOURCE_REGISTRY variable empty or missing"
-  usage;
+if [ -z "$SOURCE_REGISTRY" ] ; then
+  echo -e "\n# SOURCE_REGISTRY variable empty or missing/n"
+  exit 1
 fi
 
+echo -e " # Proceeding with LOGIN to $SOURCE_REGISTRY\n"
+podman login $SOURCE_REGISTRY
+
+echo -e " # Proceeding with LOGIN to $DEST_REGISTRY\n"
+podman login $DEST_REGISTRY
 
 # Displaying Configuration
-echo -e "\n Source Registry: $source_registry \n Destination Registry: $dest_registry \n"
-
+echo -e " # Source Registry: $SOURCE_REGISTRY \n # Destination Registry: $DEST_REGISTRY \n"
 
 while IFS="" read -r p || [ -n "$p" ]
 do
   printf '%s\n' "$p"
-  copy_image($p)
+  skopeo copy docker://$SOURCE_REGISTRY/$p docker://$DEST_REGISTRY/$p --dest-tls-verify=false
 done < images-list.txt
-
-
-# Function
-function copy_image($image) {
-    skopeo copy docker://$source_registry/$image docker://$dest_registry/$image --dest-tls-verify=false
-}
