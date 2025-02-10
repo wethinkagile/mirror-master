@@ -1,7 +1,5 @@
 # Mirror Master aka Repo Syncer
 
-![Mirror Master Flash Enemy with a pistol, Flash reflection in all mirror](./images/mirror-master.jpeg)
-
 ## Introduction
 
 Mirror Master is a lightweight docker image that uses [skopeo](https://github.com/containers/skopeo), to sync images between docker images registries, it supports all the registries supported by Skopeo such as _GCR_, _Docker Hub_, _ECR_ and _Quay_.
@@ -20,10 +18,9 @@ The default variables are environments variables that can be used to configure t
 
 | Name             | Description                                                                                                                                                          | Mandatory? |
 | ---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------: |
-| DEST_REGISTRY    | Destination Registry where the images will be copied.                                                                                                                |    YES     |
-| DEST_AUTH_PWD    | Destination Registry password if needed.                                                                                                                             |     NO     |
-| DEST_AUTH_USER   | Destination Registry username if needed.                                                                                                                             |     NO     |
-| IGNORED_TAGS     | Tags from the source registry that should be ignored, the tags need to be declared separate by a pipe |    YES     |
+| images-list.txt  | Text File with {projectName}/{repository}/{image:tag}                                                                                                                |    YES     |
 | SOURCE_REGISTRY  | Source Registry from where the images will be copied.                                                                                                                |    YES     |
-| SOURCE_AUTH_PWD  | Source Registry password if needed.                                                                                                                                  |     NO     |
-| SOURCE_AUTH_USER | Destination Registry username if needed.                                                                                                                             |     NO     |
+| DEST_REGISTRY    | Destination Registry where the images will be copied.                                                                                                                |    YES     |
+
+## Authors
+[Stephan Kristyn](https://github.com/wethinkagile) / [Phil Carvalho](https://github.com/philippescar)
