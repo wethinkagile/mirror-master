@@ -1,0 +1,112 @@
+expose:
+  ingress:
+    className: "openshift-default"
+  tls:
+    certSource: auto
+
+[root@localhost harbor]# cat values.yaml
+harborAdminPassword: "!frqAdmin"
+
+database:
+  internal:
+    password: "changeme"
+
+expose:
+  ingress:
+    hosts:
+      core: core.harbor.apps.noevog.ocp.projects.frequentis.frq
+
+externalURL: https://core.harbor.apps.noevog.ocp.projects.frequentis.frq
+
+persistence:
+  enabled: true
+  resourcePolicy: "keep"
+  persistentVolumeClaim:
+    registry:
+      existingClaim: ""
+      storageClass: "longhorn"
+      accessMode: ReadWriteOnce
+      size: 70Gi
+    jobservice:
+      jobLog:
+        existingClaim: ""
+        storageClass: "longhorn"
+        accessMode: ReadWriteOnce
+        size: 2Gi
+    database:
+      existingClaim: ""
+      storageClass: "longhorn"
+      accessMode: ReadWriteOnce
+      size: 1Gi
+    redis:
+      existingClaim: ""
+      storageClass: "longhorn"
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 1Gi
+
+portal:
+  image:
+    repository: registry.apps.noevog.ocp.projects.frequentis.frq/harbor/harbor-portal
+    tag: v2.12.2
+  resources:
+   requests:
+     memory: 25Mi
+     cpu: 5m
+core:
+  image:
+    repository: registry.apps.noevog.ocp.projects.frequentis.frq/harbor/harbor-core
+    tag: v2.12.2
+  resources:
+   requests:
+     memory: 100Mi
+     cpu: 5m
+jobservice:
+  image:
+    repository: registry.apps.noevog.ocp.projects.frequentis.frq/harbor/harbor-jobservice
+    tag: v2.12.2
+  resources:
+    requests:
+      memory: 35Mi
+      cpu: 5m
+registry:
+  registry:
+    image:
+      repository: registry.apps.noevog.ocp.projects.frequentis.frq/harbor/registry-photon
+      tag: v2.12.2
+    resources:
+     requests:
+       memory: 50Mi
+       cpu: 5m
+  controller:
+    image:
+      repository: registry.apps.noevog.ocp.projects.frequentis.frq/harbor/harbor-registryctl
+      tag: v2.12.2
+    resources:
+     requests:
+       memory: 50Mi
+       cpu: 10m
+trivy:
+  enabled: false
+
+database:
+  type: internal
+  internal:
+    image:
+      repository: registry.apps.noevog.ocp.projects.frequentis.frq/harbor/harbor-db
+      tag: v2.12.2
+    resources:
+     requests:
+       memory: 100Mi
+       cpu: 15m
+    shmSizeLimit: 512Mi
+redis:
+  type: internal
+  internal:
+    image:
+      repository: registry.apps.noevog.ocp.projects.frequentis.frq/harbor/redis-photon
+      tag: v2.12.2
+    resources:
+     requests:
+       memory: 10Mi
+       cpu: 5m

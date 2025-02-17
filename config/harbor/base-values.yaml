@@ -1,0 +1,5 @@
+expose:
+  ingress:
+    className: "openshift-default"
+  tls:
+    certSource: auto
