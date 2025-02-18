@@ -1,0 +1,3 @@
+[submodule "config/harbor/harbor-helm"]
+	path = config/harbor/harbor-helm
+	url = https://github.com/goharbor/harbor-helm.git
