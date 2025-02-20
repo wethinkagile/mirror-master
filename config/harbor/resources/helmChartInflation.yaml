@@ -7,7 +7,9 @@ name: harbor
 # 1.4.0
 version: v1.16.2
 
-repo: harbor-helm
+chartHome: harbor-helm
+name: harbor
+
 valuesFiles:
   - resources/base-values.yaml
   - resources/values.yaml
