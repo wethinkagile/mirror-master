@@ -2,18 +2,17 @@ apiVersion: builtin
 kind: HelmChartInflationGenerator
 metadata:
   name: harbor-helm
-releaseName: harbor
-name: harbor
-version: v1.16.2
+
 
 helmGlobals:
-  chartHome: charts
+  chartHome: ../charts
 
 helmCharts:
   - name: harbor-1.16.2
     # repo: https://helm.goharbor.io
-    releaseName: harbor
+    releaseName: harbor-1.16.2
     version: 1.16.2
+    includeCRDs: true
 
 valuesFiles:
   - resources/base-values.yaml
