@@ -1,0 +1,13 @@
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: harbor-helm
+releaseName: harbor
+name: harbor
+# 1.4.0
+version: v1.16.2
+
+repo: https://helm.goharbor.io
+valuesFile: resources/values.yaml
+
+
