@@ -8,6 +8,8 @@ name: harbor
 version: v1.16.2
 
 repo: https://helm.goharbor.io
-valuesFile: resources/values.yaml
+valuesFiles:
+  - resources/base-values.yaml
+  - resources/values.yaml
 
 
