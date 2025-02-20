@@ -6,11 +6,11 @@ releaseName: harbor
 name: harbor
 version: v1.16.2
 
-helmGLobals:
-  chartHome: charts/harbor-1.16.2
+helmGlobals:
+  chartHome: charts
 
 helmCharts:
-  - name: harbor
+  - name: harbor-1.16.2
     # repo: https://helm.goharbor.io
     releaseName: harbor
     version: 1.16.2
