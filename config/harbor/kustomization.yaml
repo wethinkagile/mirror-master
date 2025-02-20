@@ -4,5 +4,17 @@ kind: Kustomization
 resources:
   - resources/namespace.yaml
 
-generators:
-  - resources/helmChartInflation.yaml
+helmGlobals:
+  chartHome: charts
+
+helmCharts:
+  - name: harbor-1.16.2
+    includeCRDs: false
+    releaseName: harbor
+    releaseNamespace: harbor
+    version: v1.16.2
+    additionalValuesFiles:
+      - resources/base-values.yaml
+      - resources/values.yaml
+
+
