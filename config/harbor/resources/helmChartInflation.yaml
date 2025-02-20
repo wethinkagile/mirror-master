@@ -3,16 +3,16 @@ kind: HelmChartInflationGenerator
 metadata:
   name: harbor-helm
 releaseName: harbor-1.16.2
+releaseNamespace: harbor
 name: harbor-1.16.2
 version: v1.16.2
 includeCRDs: true
 # repo: https://helm.goharbor.io
 
-
 helmGlobals:
   chartHome: ../charts
-
 
 valuesFiles:
   - resources/base-values.yaml
   - resources/values.yaml
+
