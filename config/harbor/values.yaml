@@ -4,7 +4,6 @@ expose:
   tls:
     certSource: auto
 
-[root@localhost harbor]# cat values.yaml
 harborAdminPassword: "!frqAdmin"
 
 database:
