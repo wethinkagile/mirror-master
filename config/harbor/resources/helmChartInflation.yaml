@@ -4,14 +4,17 @@ metadata:
   name: harbor-helm
 releaseName: harbor
 name: harbor
-# 1.4.0
 version: v1.16.2
 
-chartHome: ../harbor-helm
-name: harbor
+helmGLobals:
+  chartHome: charts/harbor-1.16.2
+
+helmCharts:
+  - name: harbor
+    # repo: https://helm.goharbor.io
+    releaseName: harbor
+    version: 1.16.2
 
 valuesFiles:
   - resources/base-values.yaml
   - resources/values.yaml
-
-
