@@ -11,7 +11,7 @@ helmCharts:
   - name: harbor-1.16.2
     includeCRDs: false
     releaseName: harbor
-    releaseNamespace: harbor
+    namespace: harbor
     version: v1.16.2
     additionalValuesFiles:
       - resources/base-values.yaml
