@@ -10,7 +10,6 @@ generators:
 
 # helmGlobals:
 #   chartHome: charts
-
 # helmCharts:
 #   - name: harbor-1.16.2
 #     includeCRDs: true
