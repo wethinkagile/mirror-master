@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - resources/namespace.yaml
+  - resources/scc-rolebindings.yaml
 
 helmGlobals:
   chartHome: charts
