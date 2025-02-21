@@ -3,19 +3,20 @@ kind: Kustomization
 
 resources:
   - resources/namespace.yaml
-  - resources/scc-rolebindings.yaml
+  - resources/scc-rolebinding.yaml
 
-helmGlobals:
-  chartHome: charts
+generators:
+  - resources/helmChartInflation.yaml
 
-helmCharts:
-  - name: harbor-1.16.2
-    includeCRDs: false
-    releaseName: harbor
-    namespace: harbor
-    version: v1.16.2
-    additionalValuesFiles:
-      - resources/base-values.yaml
-      - resources/values.yaml
+# helmGlobals:
+#   chartHome: charts
 
-
+# helmCharts:
+#   - name: harbor-1.16.2
+#     includeCRDs: true
+#     releaseName: harbor
+#     namespace: harbor
+#     version: v1.16.2
+#     additionalValuesFiles:
+#       - resources/base-values.yaml
+#       - resources/values.yaml
