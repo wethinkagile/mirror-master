@@ -20,10 +20,10 @@ if [ -z "$SOURCE_REGISTRY" ] ; then
 fi
 
 echo -e " # Proceeding with LOGIN to $SOURCE_REGISTRY\n"
-podman login $SOURCE_REGISTRY
+skopeo login $SOURCE_REGISTRY
 
 echo -e " # Proceeding with LOGIN to $DEST_REGISTRY\n"
-podman login $DEST_REGISTRY
+skopeo login $DEST_REGISTRY
 
 # Displaying Configuration
 echo -e " # Source Registry: $SOURCE_REGISTRY \n # Destination Registry: $DEST_REGISTRY \n"
