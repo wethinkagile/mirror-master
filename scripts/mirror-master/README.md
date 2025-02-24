@@ -22,5 +22,21 @@ The default variables are environments variables that can be used to configure t
 | SOURCE_REGISTRY  | Source Registry from where the images will be copied.                                                                                                                |    YES     |
 | DEST_REGISTRY    | Destination Registry where the images will be copied.                                                                                                                |    YES     |
 
+## Examples
+### Login to Cluster OCP Registry
+cat /home/frqadmin/clusterconfigs/auth/kubeadmin-password
+oc login -u kubeadmin https://{Cluster API}}:6443
+skopeo login -u kubeadmin -p $(oc whoami -t) {OCP Cluster Registry}
+
+### Login to Local Gitea Registry
+podman login server.default.local:3000
+
+### Set Vars
+export SOURCE_REGISTRY={Source Registry}/{Project}
+export DEST_REGISTRY{Dest}/{Project}
+
+### Execute Script
+./mirror_master.sh
+
 ## Authors
 [Stephan Kristyn](https://github.com/wethinkagile) / [Phil Carvalho](https://github.com/philippescar)
